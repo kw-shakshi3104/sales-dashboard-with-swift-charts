@@ -2,18 +2,48 @@
 //  ContentView.swift
 //  Dashboard
 //
-//  Created by 小林慧 on 2022/09/22.
-//
+
 
 import SwiftUI
+import Charts
 
 struct ContentView: View {
+    private let salesAmount = getSalesAmount(color: .blue)
+    
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            HStack {
+                Text("Sales Summary")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+            .padding()
+            
+            HStack {
+                LineChart(salesAmount: salesAmount)
+                .padding()
+                
+                BarChart(salesAmount: salesAmount)
+                .padding()
+            }
+            
+            HStack {
+                LineChart(salesAmount: salesAmount)
+                .padding()
+                
+                BarChart(salesAmount: salesAmount)
+                .padding()
+            }
+            
+            HStack {
+                LineChart(salesAmount: salesAmount)
+                .padding()
+                
+                BarChart(salesAmount: salesAmount)
+                .padding()
+            }
         }
         .padding()
     }
