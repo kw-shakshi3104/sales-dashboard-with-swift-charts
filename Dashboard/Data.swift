@@ -29,8 +29,8 @@ enum PancakeTopping: String {
     case banana = "Banana"
 }
 
-// MARK: - PancakesSales
-struct PancakesSalesAmount {
+// MARK: - Pancakes data
+struct PancakesData {
     let totalSales: [SalesAmount]
     let salesPerCategory: [SalesAmount]
     

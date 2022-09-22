@@ -8,7 +8,7 @@ import SwiftUI
 import Charts
 
 struct ContentView: View {
-    private var pancakesSales = PancakesSalesAmount()
+    private var pancakesSales = PancakesData()
         
     var body: some View {
         VStack {
