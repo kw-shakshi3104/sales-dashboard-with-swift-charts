@@ -8,7 +8,8 @@ import SwiftUI
 import Charts
 
 struct ContentView: View {
-    private var pancakesSales = PancakesData()
+    private var pancakesData = PancakesData()
+    @State private var isShowAverage = false
         
     var body: some View {
         VStack {
@@ -25,59 +26,58 @@ struct ContentView: View {
             HStack {
                 LineChart(
                     chartTitle: "Total Sales",
-                    salesAmount: pancakesSales.totalSales
+                    salesAmount: pancakesData.totalSales,
+                    xAxisLabel: "Date",
+                    yAxisLabel: "Sales",
+                    isShowAverage: isShowAverage
                 )
                 .padding()
+                .onTapGesture {
+                    isShowAverage.toggle()
+                }
                 
                 BarChart(
-                    chartTitle: "Sales per Topping",
-                    salesAmount: pancakesSales.salesPerCategory
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesData.totalSales,
+                    xAxisLabel: "Date",
+                    yAxisLabel: "Sales"
                 )
                 .padding()
                 
                 ScatterChart(
                     chartTitle: "Total Sales",
-                    salesAmount: pancakesSales.totalSales
+                    salesAmount: pancakesData.totalSales,
+                    xAxisLabel: "Date",
+                    yAxisLabel: "Sales"
                 )
                     .padding()
             }
             
             HStack {
-                LineChart(
-                    chartTitle: "Total Sales",
-                    salesAmount: pancakesSales.totalSales
+                AreaChart(
+                    chartTitle: "Sales per Topping",
+                    salesAmount: pancakesData.salesPerCategory,
+                    xAxisLabel: "Date",
+                    yAxisLabel: "Sales",
+                    legendTitle: "Topping"
                 )
                 .padding()
                 
                 BarChart(
                     chartTitle: "Sales per Topping",
-                    salesAmount: pancakesSales.salesPerCategory
+                    salesAmount: pancakesData.salesPerCategory,
+                    xAxisLabel: "Date",
+                    yAxisLabel: "Sales",
+                    legendTitle: "Topping"
                 )
                 .padding()
                 
                 ScatterChart(
-                    chartTitle: "Total Sales",
-                    salesAmount: pancakesSales.totalSales
-                )
-                    .padding()
-            }
-            
-            HStack {
-                LineChart(
-                    chartTitle: "Total Sales",
-                    salesAmount: pancakesSales.totalSales
-                )
-                .padding()
-                
-                BarChart(
                     chartTitle: "Sales per Topping",
-                    salesAmount: pancakesSales.salesPerCategory
-                )
-                .padding()
-                
-                ScatterChart(
-                    chartTitle: "Total Sales",
-                    salesAmount: pancakesSales.totalSales
+                    salesAmount: pancakesData.salesPerCategory,
+                    xAxisLabel: "Date",
+                    yAxisLabel: "Sales",
+                    legendTitle: "Topping"
                 )
                     .padding()
             }

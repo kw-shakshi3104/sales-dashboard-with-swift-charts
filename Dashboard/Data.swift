@@ -38,7 +38,7 @@ struct PancakesData {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         
-        // Total Sales
+        // MARK: -  Total Sales
         let totalSalesChartColor = Color.blue
         totalSales = [
             SalesAmount(sales: 20000, date: dateFormatter.date(from: "2022/09/01")!, color: totalSalesChartColor),
@@ -52,7 +52,7 @@ struct PancakesData {
             SalesAmount(sales: 19000, date: dateFormatter.date(from: "2022/09/09")!, color: totalSalesChartColor),
         ]
         
-        // Sales per category
+        // MARK: - Sales per category
         salesPerCategory = [
             SalesAmount(sales: 5000, date: dateFormatter.date(from: "2022/09/01")!, color: .blue,
                         category: PancakeTopping.chocolate.rawValue),
