@@ -45,3 +45,18 @@ struct BarChart: View {
         }
     }
 }
+
+struct ScatterChart: View {
+    var salesAmount: [SalesAmount]
+    
+    var body: some View {
+        Chart {
+            ForEach(salesAmount) { amount in
+                PointMark(
+                    x: .value("Date", amount.date),
+                    y: .value("Sales", amount.sales)
+                )
+            }
+        }
+    }
+}

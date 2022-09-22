@@ -12,6 +12,7 @@ struct ContentView: View {
         
     var body: some View {
         VStack {
+            // Title
             HStack {
                 Text("Sales Summary")
                     .font(.largeTitle)
@@ -20,12 +21,16 @@ struct ContentView: View {
             }
             .padding()
             
+            // Charts
             HStack {
                 LineChart(salesAmount: pancakesSales.totalSales)
                 .padding()
                 
                 BarChart(salesAmount: pancakesSales.salesPerCategory)
                 .padding()
+                
+                ScatterChart(salesAmount: pancakesSales.totalSales)
+                    .padding()
             }
             
             HStack {
@@ -34,6 +39,9 @@ struct ContentView: View {
                 
                 BarChart(salesAmount: pancakesSales.salesPerCategory)
                 .padding()
+                
+                ScatterChart(salesAmount: pancakesSales.totalSales)
+                    .padding()
             }
             
             HStack {
@@ -42,6 +50,9 @@ struct ContentView: View {
                 
                 BarChart(salesAmount: pancakesSales.salesPerCategory)
                 .padding()
+                
+                ScatterChart(salesAmount: pancakesSales.totalSales)
+                    .padding()
             }
         }
         .padding()
