@@ -25,10 +25,18 @@ struct LineChart: View {
             
             Chart {
                 ForEach(salesAmount) { amount in
-                    LineMark(
-                        x: .value("Date", amount.date),
-                        y: .value("Sales", amount.sales)
-                    )
+                    if let category = amount.category {
+                        LineMark(
+                            x: .value("Date", amount.date),
+                            y: .value("Sales", amount.sales)
+                        )
+                        .foregroundStyle(by: .value("Topping", category))
+                    } else {
+                        LineMark(
+                            x: .value("Date", amount.date),
+                            y: .value("Sales", amount.sales)
+                        )
+                    }
                 }
             }
         }
@@ -87,10 +95,18 @@ struct ScatterChart: View {
             
             Chart {
                 ForEach(salesAmount) { amount in
-                    PointMark(
-                        x: .value("Date", amount.date),
-                        y: .value("Sales", amount.sales)
-                    )
+                    if let category = amount.category {
+                        PointMark(
+                            x: .value("Date", amount.date),
+                            y: .value("Sales", amount.sales)
+                        )
+                        .foregroundStyle(by: .value("Topping", category))
+                    } else {
+                        PointMark(
+                            x: .value("Date", amount.date),
+                            y: .value("Sales", amount.sales)
+                        )
+                    }
                 }
             }
         }
