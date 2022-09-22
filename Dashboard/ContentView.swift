@@ -23,35 +23,62 @@ struct ContentView: View {
             
             // Charts
             HStack {
-                LineChart(salesAmount: pancakesSales.totalSales)
+                LineChart(
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesSales.totalSales
+                )
                 .padding()
                 
-                BarChart(salesAmount: pancakesSales.salesPerCategory)
+                BarChart(
+                    chartTitle: "Sales per Topping",
+                    salesAmount: pancakesSales.salesPerCategory
+                )
                 .padding()
                 
-                ScatterChart(salesAmount: pancakesSales.totalSales)
+                ScatterChart(
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesSales.totalSales
+                )
                     .padding()
             }
             
             HStack {
-                LineChart(salesAmount: pancakesSales.totalSales)
+                LineChart(
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesSales.totalSales
+                )
                 .padding()
                 
-                BarChart(salesAmount: pancakesSales.salesPerCategory)
+                BarChart(
+                    chartTitle: "Sales per Topping",
+                    salesAmount: pancakesSales.salesPerCategory
+                )
                 .padding()
                 
-                ScatterChart(salesAmount: pancakesSales.totalSales)
+                ScatterChart(
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesSales.totalSales
+                )
                     .padding()
             }
             
             HStack {
-                LineChart(salesAmount: pancakesSales.totalSales)
+                LineChart(
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesSales.totalSales
+                )
                 .padding()
                 
-                BarChart(salesAmount: pancakesSales.salesPerCategory)
+                BarChart(
+                    chartTitle: "Sales per Topping",
+                    salesAmount: pancakesSales.salesPerCategory
+                )
                 .padding()
                 
-                ScatterChart(salesAmount: pancakesSales.totalSales)
+                ScatterChart(
+                    chartTitle: "Total Sales",
+                    salesAmount: pancakesSales.totalSales
+                )
                     .padding()
             }
         }
