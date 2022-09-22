@@ -29,10 +29,18 @@ struct BarChart: View {
     var body: some View {
         Chart {
             ForEach(salesAmount) { amount in
-                BarMark(
-                    x: .value("Date", amount.date),
-                    y: .value("Sales", amount.sales)
-                )
+                if let category = amount.category {
+                    BarMark(
+                        x: .value("Date", amount.date),
+                        y: .value("Sales", amount.sales)
+                    )
+                    .foregroundStyle(by: .value("Topping", category))
+                } else {
+                    BarMark(
+                        x: .value("Date", amount.date),
+                        y: .value("Sales", amount.sales)
+                    )
+                }
             }
         }
     }

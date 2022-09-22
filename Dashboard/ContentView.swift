@@ -8,9 +8,8 @@ import SwiftUI
 import Charts
 
 struct ContentView: View {
-    private let salesAmount = getSalesAmount(color: .blue)
-    
-    
+    private var pancakesSales = PancakesSalesAmount()
+        
     var body: some View {
         VStack {
             HStack {
@@ -22,26 +21,26 @@ struct ContentView: View {
             .padding()
             
             HStack {
-                LineChart(salesAmount: salesAmount)
+                LineChart(salesAmount: pancakesSales.totalSales)
                 .padding()
                 
-                BarChart(salesAmount: salesAmount)
+                BarChart(salesAmount: pancakesSales.salesPerCategory)
                 .padding()
             }
             
             HStack {
-                LineChart(salesAmount: salesAmount)
+                LineChart(salesAmount: pancakesSales.totalSales)
                 .padding()
                 
-                BarChart(salesAmount: salesAmount)
+                BarChart(salesAmount: pancakesSales.salesPerCategory)
                 .padding()
             }
             
             HStack {
-                LineChart(salesAmount: salesAmount)
+                LineChart(salesAmount: pancakesSales.totalSales)
                 .padding()
                 
-                BarChart(salesAmount: salesAmount)
+                BarChart(salesAmount: pancakesSales.salesPerCategory)
                 .padding()
             }
         }
