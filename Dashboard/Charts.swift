@@ -20,6 +20,13 @@ protocol ChartView {
     var legendTitle: String? { get }
 }
 
+// MARK: - Extension
+extension View {
+    @ViewBuilder func `condition`<Content: View>(@ViewBuilder _ transform: (Self) -> Content) -> some View {
+        transform(self)
+    }
+}
+
 // MARK: - Line Chart
 struct LineChart: View, ChartView {
     var salesAmount: [any SalesData]
@@ -29,7 +36,7 @@ struct LineChart: View, ChartView {
     var yAxisLabel: String
     var legendTitle: String?
     
-    var isShowAverage: Bool = false
+    var showAverage: Bool = false
     
     var body: some View {
         VStack {
@@ -43,7 +50,7 @@ struct LineChart: View, ChartView {
             }
             
             Chart {
-                if isShowAverage {
+                if showAverage {
                     lineMarks()
                         .foregroundStyle(.gray.opacity(0.5))
                         .interpolationMethod(.catmullRom)
@@ -52,6 +59,7 @@ struct LineChart: View, ChartView {
                     RuleMark(
                         y: .value("Average", average)
                     )
+                    .lineStyle(StrokeStyle(lineWidth: 3))
                 } else {
                     lineMarks()
                         .interpolationMethod(.catmullRom)
@@ -87,6 +95,8 @@ struct BarChart: View, ChartView {
     var yAxisLabel: String
     var legendTitle: String?
     
+    var showAverage: Bool = false
+    
     var body: some View {
         VStack {
             if let chartTitle {
@@ -99,20 +109,35 @@ struct BarChart: View, ChartView {
             }
             
             Chart {
-                ForEach(salesAmount, id: \.id) { amount in
-                    if let category = amount.category, let legendTitle {
-                        BarMark(
-                            x: .value(xAxisLabel, amount.date),
-                            y: .value(yAxisLabel, amount.sales)
-                        )
-                        .foregroundStyle(by: .value(legendTitle, category))
-                    } else {
-                        BarMark(
-                            x: .value(xAxisLabel, amount.date),
-                            y: .value(yAxisLabel, amount.sales)
-                        )
-                    }
+                if showAverage {
+                    barMarks()
+                        .foregroundStyle(.gray.opacity(0.5))
+                    
+                    let average: Double = Double(salesAmount.reduce(0) { $0 + $1.sales }) / Double(salesAmount.count)
+                    RuleMark(
+                        y: .value("Average", average)
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: 3))
+                } else {
+                    barMarks()
                 }
+            }
+        }
+    }
+    
+    func barMarks() -> some ChartContent {
+        return ForEach(salesAmount, id: \.id) { amount in
+            if let category = amount.category, let legendTitle {
+                BarMark(
+                    x: .value(xAxisLabel, amount.date),
+                    y: .value(yAxisLabel, amount.sales)
+                )
+                .foregroundStyle(by: .value(legendTitle, category))
+            } else {
+                BarMark(
+                    x: .value(xAxisLabel, amount.date),
+                    y: .value(yAxisLabel, amount.sales)
+                )
             }
         }
     }

@@ -9,7 +9,8 @@ import Charts
 
 struct ContentView: View {
     private var pancakesData = PancakesData()
-    @State private var isShowAverage = false
+    @State private var showLineChartAverage = false
+    @State private var showBarChartAverage = false
         
     var body: some View {
         VStack {
@@ -29,20 +30,24 @@ struct ContentView: View {
                     chartTitle: "Total Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
-                    isShowAverage: isShowAverage
+                    showAverage: showLineChartAverage
                 )
                 .padding()
                 .onTapGesture {
-                    isShowAverage.toggle()
+                    showLineChartAverage.toggle()
                 }
                 
                 BarChart(
                     salesAmount: pancakesData.totalSales,
                     chartTitle: "Total Sales",
                     xAxisLabel: "Date",
-                    yAxisLabel: "Sales"
+                    yAxisLabel: "Sales",
+                    showAverage: showBarChartAverage
                 )
                 .padding()
+                .onTapGesture {
+                    showBarChartAverage.toggle()
+                }
                 
                 ScatterChart(
                     salesAmount: pancakesData.totalSales,
