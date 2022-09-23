@@ -25,8 +25,8 @@ struct ContentView: View {
             // Charts
             HStack {
                 LineChart(
-                    chartTitle: "Total Sales",
                     salesAmount: pancakesData.totalSales,
+                    chartTitle: "Total Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     isShowAverage: isShowAverage
@@ -37,16 +37,16 @@ struct ContentView: View {
                 }
                 
                 BarChart(
-                    chartTitle: "Total Sales",
                     salesAmount: pancakesData.totalSales,
+                    chartTitle: "Total Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales"
                 )
                 .padding()
                 
                 ScatterChart(
-                    chartTitle: "Total Sales",
                     salesAmount: pancakesData.totalSales,
+                    chartTitle: "Total Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales"
                 )
@@ -55,8 +55,8 @@ struct ContentView: View {
             
             HStack {
                 AreaChart(
-                    chartTitle: "Sales per Topping",
                     salesAmount: pancakesData.salesPerCategory,
+                    chartTitle: "Sales per Topping",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     legendTitle: "Topping"
@@ -64,22 +64,22 @@ struct ContentView: View {
                 .padding()
                 
                 BarChart(
-                    chartTitle: "Sales per Topping",
                     salesAmount: pancakesData.salesPerCategory,
+                    chartTitle: "Sales per Topping",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     legendTitle: "Topping"
                 )
                 .padding()
                 
-                ScatterChart(
-                    chartTitle: "Sales per Topping",
-                    salesAmount: pancakesData.salesPerCategory,
-                    xAxisLabel: "Date",
-                    yAxisLabel: "Sales",
-                    legendTitle: "Topping"
+                HeatMap(
+                    salesCount: pancakesData.salesCategoryVsStore,
+                    chartTitle: "Topping vs. Store",
+                    xAxisLabel: "Topping",
+                    yAxisLabel: "Store",
+                    legendTitle: "Sales"
                 )
-                    .padding()
+                .padding()
             }
         }
         .padding()

@@ -7,8 +7,17 @@
 import Foundation
 import SwiftUI
 
+// MARK: Date Structure
 // MARK: -
-struct SalesAmount: Identifiable {
+protocol SalesData: Identifiable {
+    var sales: Int { get }
+    var date: Date { get }
+    var category: String? { get }
+    var id: UUID { get }
+}
+
+// MARK: -
+struct SalesAmount: SalesData {
     /// sales amount
     var sales: Int
     /// date
@@ -21,6 +30,22 @@ struct SalesAmount: Identifiable {
     var id = UUID()
 }
 
+// MARK: -
+struct SalesCount: SalesData {
+    /// sales count
+    var sales: Int
+    /// date
+    var date: Date
+    /// chart color
+    var color: Color
+    /// item category
+    var category: String?
+    /// store
+    var store: String?
+    /// identifier
+    var id = UUID()
+}
+
 // MARK: - Pancake topping
 enum PancakeTopping: String {
     case chocolate = "Chocolate"
@@ -29,10 +54,20 @@ enum PancakeTopping: String {
     case banana = "Banana"
 }
 
+// MARK: - Pancake store place
+enum PancakeStore: String {
+    case ginza = "Ginza"
+    case marunouchi = "Marunouchi"
+    case omotesando = "Omotesando"
+    case shinjuku = "Shinjuku"
+    case shibuya = "Shibuya"
+}
+
 // MARK: - Pancakes data
 struct PancakesData {
     let totalSales: [SalesAmount]
     let salesPerCategory: [SalesAmount]
+    let salesCategoryVsStore: [SalesCount]
     
     init() {
         let dateFormatter = DateFormatter()
@@ -134,6 +169,54 @@ struct PancakesData {
                         category: PancakeTopping.blueberry.rawValue),
             SalesAmount(sales: 5000, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
                         category: PancakeTopping.banana.rawValue),
+        ]
+        
+        // MARK: Sales counts, Category vs Store
+        salesCategoryVsStore = [
+            SalesCount(sales: 100, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
+                       category: PancakeTopping.chocolate.rawValue, store: PancakeStore.ginza.rawValue),
+            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
+                       category: PancakeTopping.strawberry.rawValue, store: PancakeStore.ginza.rawValue),
+            SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
+                       category: PancakeTopping.blueberry.rawValue, store: PancakeStore.ginza.rawValue),
+            SalesCount(sales: 110, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
+                       category: PancakeTopping.banana.rawValue, store: PancakeStore.ginza.rawValue),
+            
+            SalesCount(sales: 80, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
+                       category: PancakeTopping.chocolate.rawValue, store: PancakeStore.marunouchi.rawValue),
+            SalesCount(sales: 100, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
+                       category: PancakeTopping.strawberry.rawValue, store: PancakeStore.marunouchi.rawValue),
+            SalesCount(sales: 130, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
+                       category: PancakeTopping.blueberry.rawValue, store: PancakeStore.marunouchi.rawValue),
+            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
+                       category: PancakeTopping.banana.rawValue, store: PancakeStore.marunouchi.rawValue),
+            
+            SalesCount(sales: 110, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
+                       category: PancakeTopping.chocolate.rawValue, store: PancakeStore.omotesando.rawValue),
+            SalesCount(sales: 80, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
+                       category: PancakeTopping.strawberry.rawValue, store: PancakeStore.omotesando.rawValue),
+            SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
+                       category: PancakeTopping.blueberry.rawValue, store: PancakeStore.omotesando.rawValue),
+            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
+                       category: PancakeTopping.banana.rawValue, store: PancakeStore.omotesando.rawValue),
+            
+            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
+                       category: PancakeTopping.chocolate.rawValue, store: PancakeStore.shinjuku.rawValue),
+            SalesCount(sales: 110, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
+                       category: PancakeTopping.strawberry.rawValue, store: PancakeStore.shinjuku.rawValue),
+            SalesCount(sales: 80, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
+                       category: PancakeTopping.blueberry.rawValue, store: PancakeStore.shinjuku.rawValue),
+            SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
+                       category: PancakeTopping.banana.rawValue, store: PancakeStore.shinjuku.rawValue),
+            
+            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
+                       category: PancakeTopping.chocolate.rawValue, store: PancakeStore.shibuya.rawValue),
+            SalesCount(sales: 110, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
+                       category: PancakeTopping.strawberry.rawValue, store: PancakeStore.shibuya.rawValue),
+            SalesCount(sales: 80, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
+                       category: PancakeTopping.blueberry.rawValue, store: PancakeStore.shibuya.rawValue),
+            SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
+                       category: PancakeTopping.banana.rawValue, store: PancakeStore.shibuya.rawValue),
             
         ]
     }
