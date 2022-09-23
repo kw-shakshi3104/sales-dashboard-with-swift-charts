@@ -209,13 +209,13 @@ struct PancakesData {
             SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
                        category: PancakeTopping.banana.rawValue, store: PancakeStore.shinjuku.rawValue),
             
-            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
+            SalesCount(sales: 100, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
                        category: PancakeTopping.chocolate.rawValue, store: PancakeStore.shibuya.rawValue),
-            SalesCount(sales: 110, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
+            SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .green,
                        category: PancakeTopping.strawberry.rawValue, store: PancakeStore.shibuya.rawValue),
-            SalesCount(sales: 80, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
+            SalesCount(sales: 120, date: dateFormatter.date(from: "2022/09/09")!, color: .orange,
                        category: PancakeTopping.blueberry.rawValue, store: PancakeStore.shibuya.rawValue),
-            SalesCount(sales: 90, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
+            SalesCount(sales: 70, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
                        category: PancakeTopping.banana.rawValue, store: PancakeStore.shibuya.rawValue),
             
         ]

@@ -226,13 +226,21 @@ struct HeatMap: View, ChartView {
                     if let category = count.category, let store = count.store, let legendTitle {
                         RectangleMark(
                             x: .value(xAxisLabel, category),
-                            y: .value(yAxisLabel, store)
+                            y: .value(yAxisLabel, store),
+                            width: .ratio(1),
+                            height: .ratio(1)
                         )
                         .foregroundStyle(by: .value(legendTitle, count.sales))
                     }
                 } 
             }
             .chartLegend(.hidden)
+            .chartYAxis {
+                AxisMarks(preset: .aligned)
+            }
+            .chartXAxis {
+                AxisMarks(position: .top)
+            }
         }
     }
     
