@@ -86,7 +86,7 @@ struct LineChart: View, ChartView {
     }
 }
 
-// MARK: -  Bar Chary
+// MARK: -  Bar Chart
 struct BarChart: View, ChartView {
     var salesAmount: [any SalesData]
     
@@ -138,6 +138,45 @@ struct BarChart: View, ChartView {
                     x: .value(xAxisLabel, amount.date),
                     y: .value(yAxisLabel, amount.sales)
                 )
+            }
+        }
+    }
+}
+
+struct BarChartTranspose: View, ChartView {
+    var salesAmount: [any SalesData]
+    
+    var chartTitle: String?
+    var xAxisLabel: String
+    var yAxisLabel: String
+    var legendTitle: String?
+    
+    var body: some View {
+        VStack {
+            if let chartTitle {
+                HStack {
+                    Text(chartTitle)
+                        .font(.title2)
+                        .fontWeight(.medium)
+                    Spacer()
+                }
+            }
+            
+            Chart {
+                ForEach(salesAmount, id: \.id) { amount in
+                    if let category = amount.category, let legendTitle {
+                        BarMark(
+                            x: .value(xAxisLabel, amount.sales),
+                            y: .value(yAxisLabel, category)
+                        )
+                        .foregroundStyle(by: .value(legendTitle, category))
+                    } else {
+                        BarMark(
+                            x: .value(xAxisLabel, amount.sales),
+                            y: .value(yAxisLabel, amount.date)
+                        )
+                    }
+                }
             }
         }
     }

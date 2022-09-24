@@ -47,7 +47,7 @@ struct SalesCount: SalesData {
 }
 
 // MARK: - Pancake topping
-enum PancakeTopping: String {
+enum PancakeTopping: String, CaseIterable {
     case chocolate = "Chocolate"
     case strawberry = "Strawberry"
     case blueberry = "Blueberry"
@@ -55,7 +55,7 @@ enum PancakeTopping: String {
 }
 
 // MARK: - Pancake store place
-enum PancakeStore: String {
+enum PancakeStore: String, CaseIterable {
     case ginza = "Ginza"
     case marunouchi = "Marunouchi"
     case omotesando = "Omotesando"
@@ -65,17 +65,18 @@ enum PancakeStore: String {
 
 // MARK: - Pancakes data
 struct PancakesData {
-    let totalSales: [SalesAmount]
-    let salesPerCategory: [SalesAmount]
+    let dailySales: [SalesAmount]
+    let dailySalesPerCategory: [SalesAmount]
     let salesCategoryVsStore: [SalesCount]
+    let totalSalesPerCategory: [SalesAmount]
     
     init() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         
-        // MARK: -  Total Sales
+        // MARK: -  Daily sales
         let totalSalesChartColor = Color.blue
-        totalSales = [
+        dailySales = [
             SalesAmount(sales: 20000, date: dateFormatter.date(from: "2022/09/01")!, color: totalSalesChartColor),
             SalesAmount(sales: 18000, date: dateFormatter.date(from: "2022/09/02")!, color: totalSalesChartColor),
             SalesAmount(sales: 23000, date: dateFormatter.date(from: "2022/09/03")!, color: totalSalesChartColor),
@@ -87,8 +88,8 @@ struct PancakesData {
             SalesAmount(sales: 19000, date: dateFormatter.date(from: "2022/09/09")!, color: totalSalesChartColor),
         ]
         
-        // MARK: - Sales per category
-        salesPerCategory = [
+        // MARK: - Daily sales per category
+        let dailySalesCategory = [
             SalesAmount(sales: 5000, date: dateFormatter.date(from: "2022/09/01")!, color: .blue,
                         category: PancakeTopping.chocolate.rawValue),
             SalesAmount(sales: 6000, date: dateFormatter.date(from: "2022/09/01")!, color: .green,
@@ -170,8 +171,9 @@ struct PancakesData {
             SalesAmount(sales: 5000, date: dateFormatter.date(from: "2022/09/09")!, color: .yellow,
                         category: PancakeTopping.banana.rawValue),
         ]
+        dailySalesPerCategory = dailySalesCategory
         
-        // MARK: Sales counts, Category vs Store
+        // MARK: - Sales counts, Category vs Store
         salesCategoryVsStore = [
             SalesCount(sales: 100, date: dateFormatter.date(from: "2022/09/09")!, color: .blue,
                        category: PancakeTopping.chocolate.rawValue, store: PancakeStore.ginza.rawValue),
@@ -219,5 +221,14 @@ struct PancakesData {
                        category: PancakeTopping.banana.rawValue, store: PancakeStore.shibuya.rawValue),
             
         ]
+        
+        // MARK: - Total sales per category
+        totalSalesPerCategory = PancakeTopping.allCases.map({ topping in
+            SalesAmount(
+                sales: dailySalesCategory.filter { $0.category == topping.rawValue }.reduce(0) { $0 + $1.sales },
+                date: dateFormatter.date(from: "2022/09/09")!,
+                color: dailySalesCategory.filter { $0.category == topping.rawValue }[0].color,
+                category: topping.rawValue)
+        })
     }
 }

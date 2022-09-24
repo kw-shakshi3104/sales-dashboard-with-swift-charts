@@ -26,8 +26,8 @@ struct ContentView: View {
             // Charts
             HStack {
                 LineChart(
-                    salesAmount: pancakesData.totalSales,
-                    chartTitle: "Total Sales",
+                    salesAmount: pancakesData.dailySales,
+                    chartTitle: "Daily Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     showAverage: showLineChartAverage
@@ -38,8 +38,8 @@ struct ContentView: View {
                 }
                 
                 BarChart(
-                    salesAmount: pancakesData.totalSales,
-                    chartTitle: "Total Sales",
+                    salesAmount: pancakesData.dailySales,
+                    chartTitle: "Daily Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     showAverage: showBarChartAverage
@@ -50,18 +50,27 @@ struct ContentView: View {
                 }
                 
                 ScatterChart(
-                    salesAmount: pancakesData.totalSales,
-                    chartTitle: "Total Sales",
+                    salesAmount: pancakesData.dailySales,
+                    chartTitle: "Daily Sales",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales"
                 )
-                    .padding()
+                .padding()
+                
+                BarChartTranspose(
+                    salesAmount: pancakesData.totalSalesPerCategory,
+                                  
+                    chartTitle: "Total Sales per Topping",
+                                  
+                    xAxisLabel: "Sales",
+                    yAxisLabel: "Topping", legendTitle: "Topping")
+                .padding()
             }
             
             HStack {
                 AreaChart(
-                    salesAmount: pancakesData.salesPerCategory,
-                    chartTitle: "Sales per Topping",
+                    salesAmount: pancakesData.dailySalesPerCategory,
+                    chartTitle: "Daily Sales per Topping",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     legendTitle: "Topping"
@@ -69,8 +78,8 @@ struct ContentView: View {
                 .padding()
                 
                 BarChart(
-                    salesAmount: pancakesData.salesPerCategory,
-                    chartTitle: "Sales per Topping",
+                    salesAmount: pancakesData.dailySalesPerCategory,
+                    chartTitle: "Daily Sales per Topping",
                     xAxisLabel: "Date",
                     yAxisLabel: "Sales",
                     legendTitle: "Topping"
