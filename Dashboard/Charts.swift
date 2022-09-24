@@ -151,6 +151,8 @@ struct BarChartTranspose: View, ChartView {
     var yAxisLabel: String
     var legendTitle: String?
     
+    var showAverage: Bool = false
+    
     var body: some View {
         VStack {
             if let chartTitle {
@@ -163,20 +165,36 @@ struct BarChartTranspose: View, ChartView {
             }
             
             Chart {
-                ForEach(salesAmount, id: \.id) { amount in
-                    if let category = amount.category, let legendTitle {
-                        BarMark(
-                            x: .value(xAxisLabel, amount.sales),
-                            y: .value(yAxisLabel, category)
-                        )
-                        .foregroundStyle(by: .value(legendTitle, category))
-                    } else {
-                        BarMark(
-                            x: .value(xAxisLabel, amount.sales),
-                            y: .value(yAxisLabel, amount.date)
-                        )
-                    }
+                if showAverage {
+                    barMarks()
+                        .foregroundStyle(.gray.opacity(0.5))
+                    
+                    let average: Double = Double(salesAmount.reduce(0) { $0 + $1.sales }) / Double(salesAmount.count)
+                    RuleMark(
+                        x: .value("Average", average)
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: 3))
+                } else {
+                    barMarks()
                 }
+            }
+            .chartLegend(.hidden)
+        }
+    }
+    
+    func barMarks() -> some ChartContent {
+        return ForEach(salesAmount, id: \.id) { amount in
+            if let category = amount.category, let legendTitle {
+                BarMark(
+                    x: .value(xAxisLabel, amount.sales),
+                    y: .value(yAxisLabel, category)
+                )
+                .foregroundStyle(by: .value(legendTitle, category))
+            } else {
+                BarMark(
+                    x: .value(xAxisLabel, amount.sales),
+                    y: .value(yAxisLabel, amount.date)
+                )
             }
         }
     }

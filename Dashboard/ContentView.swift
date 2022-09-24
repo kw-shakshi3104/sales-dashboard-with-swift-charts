@@ -61,9 +61,10 @@ struct ContentView: View {
                     salesAmount: pancakesData.totalSalesPerCategory,
                                   
                     chartTitle: "Total Sales per Topping",
-                                  
                     xAxisLabel: "Sales",
-                    yAxisLabel: "Topping", legendTitle: "Topping")
+                    yAxisLabel: "Topping",
+                    legendTitle: "Topping"
+                )
                 .padding()
             }
             
